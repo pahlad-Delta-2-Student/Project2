@@ -68,13 +68,14 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findById(id);
+    let listing = await Listing.findById(id).populate("reviews");
+    console.log(listing.reviews)
     res.render("show.ejs", { listing });
   })
 );
 
 // //New Route
-app.get("/home/new", (req, res) => {
+app.get("/listing/new", (req, res) => {
   res.render("new.ejs");
 });
 
